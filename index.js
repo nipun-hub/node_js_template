@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
 import app from './app.js';
 import logger from './src/utils/logger.utils.js';
-import { initializeDatabase } from './src/config/database.js'; 
+import { initializeDatabase } from './src/config/database.js';
+import {initializeModels} from './src/models/index.js';
 
 dotenv.config();
 
@@ -52,6 +53,9 @@ const startServer = async () => {
     // Initialize Database
     await initializeDatabase();
 
+    // Initialize models
+    await initializeModels();
+
     // Start Express server
     const PORT = process.env.PORT || 8080;
     app.listen(PORT, () => {
@@ -62,6 +66,5 @@ const startServer = async () => {
     process.exit(1);
   }
 };
-
 // Execute server startup
 startServer();

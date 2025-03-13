@@ -1,16 +1,14 @@
 import express from 'express';
+import userController from '../controllers/user.controller.js';
 
-const router = express.Router();
+const useRouter = express.Router();
 
-// Sample GET route (Fetch all users)
-router.get('/', async (req, res) => {
-  res.json({ message: '🧑‍🤝‍🧑 Fetching all users...' });
-});
+// Complete routes for user operations
+useRouter.get('/', userController.getAllUsers);
+useRouter.get('/:id', userController.getUserById);
+useRouter.post('/', userController.createUser);
+useRouter.put('/:id', userController.updateUser);
+useRouter.delete('/:id', userController.deleteUser);
 
-// Sample POST route (Create new user)
-router.post('/', async (req, res) => {
-  const { name, email } = req.body;
-  res.json({ message: `✅ User ${name} with email ${email} created!` });
-});
+export default useRouter;
 
-export default router;
